@@ -33,11 +33,11 @@ namespace RestaurantAPI.Services
         public void Delete(int id)
         {
 
-            _logger.LogError($"Restaurant with id: {id} Delete action invoked");
+            _logger.LogError($"Restaurant with Id: {id} Delete action invoked");
 
             var restaurant = _dbContext
                .Restaurants
-               .FirstOrDefault(r => r.id == id);
+               .FirstOrDefault(r => r.Id == id);
 
             if (restaurant is null) 
                 throw new KeyNotFoundException("Restaurant not found");
@@ -52,7 +52,7 @@ namespace RestaurantAPI.Services
                .Restaurants
                .Include(r => r.Address)
                .Include(r => r.Dishes)
-               .FirstOrDefault(r => r.id == id);
+               .FirstOrDefault(r => r.Id == id);
 
             if (restaurant is null) 
                 throw new KeyNotFoundException("Restaurant not found");
@@ -80,14 +80,14 @@ namespace RestaurantAPI.Services
             _dbContext.Restaurants.Add(restaurant);
             _dbContext.SaveChanges();
 
-            return restaurant.id;
+            return restaurant.Id;
         }
 
         public void Update(int id, UpdateRestaurantDto dto)
         {
             var restaurant = _dbContext
                .Restaurants
-               .FirstOrDefault(r => r.id == id);
+               .FirstOrDefault(r => r.Id == id);
 
             if (restaurant is null) 
                 throw new KeyNotFoundException("Restaurant not found");

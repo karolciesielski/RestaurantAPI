@@ -17,19 +17,19 @@ namespace RestaurantAPI.Controllers
             _restaurantService = restaurantService;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{Id}")]
         public ActionResult Update([FromBody] UpdateRestaurantDto dto, [FromRoute]int id)
         {
             /*if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);                      //Controller validation 
             }
-            _restaurantService.Update(id, dto);*/
+            _restaurantService.Update(Id, dto);*/
 
             return Ok();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{Id}")]
         public ActionResult Delete([FromRoute] int id)
         {
             _restaurantService.Delete(id);
@@ -53,7 +53,7 @@ namespace RestaurantAPI.Controllers
             return Ok(restaurantsDtos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
         public ActionResult<RestaurantDto> Get([FromRoute] int id)
         {
             var restaurant = _restaurantService.GetById(id);
