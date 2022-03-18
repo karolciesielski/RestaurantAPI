@@ -15,6 +15,7 @@ using RestaurantAPI.Services;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using RestaurantAPI.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace RestaurantAPI
 {
@@ -62,7 +63,6 @@ namespace RestaurantAPI
             services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
             services.AddControllers().AddFluentValidation();
-            services.AddDbContext<RestaurantDbContext>();
             services.AddScoped<RestaurantSeeder>();
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddScoped<IRestaurantService, RestaurantService>();
@@ -85,6 +85,9 @@ namespace RestaurantAPI
                         .WithOrigins(Configuration["AllowedOrigins"])
                     );
             });
+
+            services.AddDbContext<RestaurantDbContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("RestaurantDbConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
